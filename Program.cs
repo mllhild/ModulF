@@ -22,7 +22,7 @@ namespace ModulF
             Console.WriteLine("1 - Erste Schritte");
             Console.WriteLine("2 - Hotel");
             Console.WriteLine("3 - Hotel mit Kindern");
-            Console.WriteLine("4 - ");
+            Console.WriteLine("4 - Hotel with Rooms");
             Console.WriteLine("5 - ");
             Console.WriteLine("6 - ");
             Console.WriteLine("7 - ");
@@ -41,7 +41,7 @@ namespace ModulF
                 case "1": new _01().Run(); break;
                 case "2": new _02().Run(); break;
                 case "3": new _03().Run(); break;
-                case "4": new _04().Run(); break;
+                case "4": new _04start().Run(); break;
                 case "5": new _05().Run(); break;
                 case "6": new _06().Run(); break;
                 case "7": new _07().Run(); break;
