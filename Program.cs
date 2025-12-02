@@ -32,6 +32,7 @@ namespace ModulF
             Console.WriteLine("0 - Quit");
 
             Console.WriteLine("F - Flappy Bird");
+            Console.WriteLine("B - Battleship");
             Console.WriteLine("----------------------------\n");
 
             string input = Console.ReadLine();
@@ -49,6 +50,7 @@ namespace ModulF
                 case "9": ChangeBackgroundColor(); break;
 
                 case "F": new FlappyBird().Start(); break;
+                case "B": new BattleShip().Start(); break;
 
 
                 case "0":
