@@ -23,7 +23,7 @@ namespace ModulF.Tage
         // sunk ships are announced
 
         int mapHeight = 10;
-        int mapWidth = 10;
+        int mapWidth = 15;
 
         Player player1 = new Player();
         Player player2 = new Player();
@@ -36,7 +36,7 @@ namespace ModulF.Tage
             player1.PositionShips(mapHeight, mapWidth);
             player2.PositionShips(mapHeight, mapWidth);
             //Console.ReadKey();
-            Thread.Sleep(200);
+            Thread.Sleep(500);
             TakeTurns();
             Console.ReadKey(intercept: true);
         }
@@ -68,7 +68,7 @@ namespace ModulF.Tage
                 else
                     Console.WriteLine($"End Of Turn {turnCounter} for {player2.name}");
                 playerTurn = !playerTurn;
-                Thread.Sleep(500);
+                Thread.Sleep(100);
             }
             Console.WriteLine("Game Over");
         }
@@ -78,7 +78,7 @@ namespace ModulF.Tage
             Console.Clear();
 
             StringBuilder sbheader = new StringBuilder();
-            sbheader.Append("   ");
+            sbheader.Append("    ");
             for (int j = 0; j < mapWidth; j++)
             {
                 sbheader.Append((char)(j + 65));
@@ -95,9 +95,12 @@ namespace ModulF.Tage
             for (int i = 0; i < mapHeight; i++)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(i.ToString()+" ");
-                
-                for(int j = 0; j < mapWidth; j++)
+                if(i < 10)
+                    sb.Append(i.ToString() + "  ");
+                else
+                    sb.Append(i.ToString() + " ");
+
+                for (int j = 0; j < mapWidth; j++)
                 {
                     if (player1.map[i, j] == 1)
                         sb.Append(" 0");
@@ -125,6 +128,12 @@ namespace ModulF.Tage
 
             player1.PrintShipList();
             player2.PrintShipList();
+
+            player1.PrintShipList2();
+            player2.PrintShipList2();
+
+
+
         }
 
     }
@@ -166,7 +175,7 @@ namespace ModulF.Tage
                     int shipSize = i + 2;
                     int x = random.Next(mapWidth);
                     int y = random.Next(mapHeight);
-                    int direction = random.Next(0,7);
+                    int direction = random.Next(0,8);
                     Ship ship = null;
                     switch (direction)
                     {
@@ -193,7 +202,7 @@ namespace ModulF.Tage
 
                     bool insideOfMap = true;
                     foreach (ShipPart part in ship.parts)
-                        if(part.x >= mapWidth || part.y >= mapHeight || part.x < 0 || part.y < 0)
+                        if(part.x >= mapHeight  || part.y >= mapWidth || part.x < 0 || part.y < 0)
                             insideOfMap = false;
 
                     if (positionsAlreadyOccupied || insideOfMap == false)
@@ -248,7 +257,7 @@ namespace ModulF.Tage
                 probability[x,y] = 0;
                 for(int x1 = -1; x1 <= 1; x1++)
                     for (int y1 = -1; y1 <= 1; y1++)
-                        if(x+x1 >= 0 && y+y1 >= 0 && x + x1 < mapWidth && y + y1 < mapHeight)
+                        if(x+x1 >= 0 && y+y1 >= 0 && x + x1 < mapHeight && y + y1 < mapWidth)
                             probability[x + x1, y + y1] = (probability[x + x1, y + y1]) * 2;
             }
             else
@@ -257,7 +266,7 @@ namespace ModulF.Tage
                 probability[x, y] = 0;
                 for (int x1 = -1; x1 <= 1; x1++)
                     for (int y1 = -1; y1 <= 1; y1++)
-                        if (x + x1 >= 0 && y + y1 >= 0 && x + x1 < mapWidth && y + y1 < mapHeight)
+                        if ((x + x1) >= 0 && (y + y1) >= 0 && (x + x1) < mapHeight && (y + y1) < mapWidth)
                             probability[x + x1, y + y1] = (probability[x + x1, y + y1]) / 2;
             }
             return wasHit;
@@ -301,6 +310,18 @@ namespace ModulF.Tage
                 sb.Append(", ");
             }
             Console.WriteLine(sb.ToString());
+        }
+        internal void PrintShipList2()
+        {
+            foreach(Ship ship in ships)
+            {
+                if(ship.isSunk)
+                    continue;
+                Console.Write($"\n ShipL:{ship.length} Parts:");
+                foreach (ShipPart part in ship.parts)
+                    Console.Write($" x:{part.x} y:{part.y}");
+            }
+            Console.WriteLine();
         }
     }
 
