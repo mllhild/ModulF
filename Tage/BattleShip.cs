@@ -31,6 +31,7 @@ namespace ModulF.Tage
 
         internal void Start()
         {
+            //Console.SetWindowSize(120, mapHeight*4);
             player1.name = "P1";
             player2.name = "P2";
             player1.PositionShips(mapHeight, mapWidth);
@@ -69,6 +70,10 @@ namespace ModulF.Tage
                     Console.WriteLine($"End Of Turn {turnCounter} for {player2.name}");
                 playerTurn = !playerTurn;
                 Thread.Sleep(100);
+                if(turnCounter > 2*mapWidth*mapHeight)
+                {
+                    throw new Exception("Overkill");
+                }
             }
             Console.WriteLine("Game Over");
         }
@@ -129,8 +134,8 @@ namespace ModulF.Tage
             player1.PrintShipList();
             player2.PrintShipList();
 
-            player1.PrintShipList2();
-            player2.PrintShipList2();
+            //player1.PrintShipList2();
+            //player2.PrintShipList2();
 
 
 
