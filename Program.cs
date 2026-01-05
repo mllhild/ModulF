@@ -18,14 +18,15 @@ namespace ModulF
 
         static void ChooseChapter() 
         {
+            Console.Clear();
             Console.WriteLine("Choose Chapter");
             Console.WriteLine("1 - Erste Schritte");
             Console.WriteLine("2 - Hotel");
             Console.WriteLine("3 - Hotel mit Kindern");
             Console.WriteLine("4 - Hotel with Rooms");
-            Console.WriteLine("5 - ");
-            Console.WriteLine("6 - ");
-            Console.WriteLine("7 - ");
+            Console.WriteLine("5 - Classes and enums");
+            Console.WriteLine("6 - Inheritance");
+            Console.WriteLine("7 - By Reference of By Value");
             Console.WriteLine("");
             Console.WriteLine("7 - Change Text Color");
             Console.WriteLine("8 - Change Background Color");
